@@ -5,6 +5,7 @@ import { useDemo } from "./demo-context";
 import { Icon, TrayPhoto } from "./ui";
 import { PageHeading } from "./dashboard";
 import { components, dateLabel, schools, type Report } from "@/lib/data";
+import TrayScanner from "./tray-scanner";
 
 async function readImage(file: File) {
   if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) throw new Error("Gunakan foto JPG, PNG, atau WebP.");
@@ -29,8 +30,8 @@ export default function Capture() {
   useEffect(() => { const now = new Date(); setDate([now.getFullYear(), String(now.getMonth()+1).padStart(2,"0"), String(now.getDate()).padStart(2,"0")].join("-")); }, []);
   useEffect(() => {
     if (!processing) return;
-    const timer = setInterval(() => setProgress(p => Math.min(3, p + 1)), 650);
-    const finish = setTimeout(() => { if (pending.current) { addReport(pending.current); router.push("/hasil/?id=" + pending.current.id); } }, 2700);
+    const timer = setInterval(() => setProgress(p => Math.min(3, p + 1)), 1100);
+    const finish = setTimeout(() => { if (pending.current) { addReport(pending.current); router.push("/hasil/?id=" + pending.current.id); } }, 4700);
     return () => { clearInterval(timer); clearTimeout(finish); };
     // The staged simulation must run once; the pending record is held in a ref.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,7 +53,7 @@ export default function Capture() {
     pending.current = { id: "TNT-" + Date.now(), school, date, menu: menu.trim(), samples, portions, components: components.map(c => ({ ...c, food: menu.includes("panggang") ? ({ Kentang: "Kentang panggang", Lauk: "Ayam panggang", Sayur: "Capcai", Buah: "Semangka" }[c.name] ?? c.food) : c.food })), before: example ? undefined : before, after: example ? undefined : after, source: example ? "contoh" : "unggahan" };
     setProcessing(true);
   }
-  if (processing) return <div className="processing-screen" aria-live="polite"><img src="/brand/porsi.png" alt="" width="200" height="206"/><h1>Menyiapkan hasil pengamatan.</h1><p>Merangkum pasangan foto dan data menu yang kamu catat.</p><ol>{["Menyiapkan pasangan foto", "Menyiapkan estimasi sisa", "Menghitung ringkasan sampel", "Menyusun ringkasan pengamatan"].map((s, i) => <li key={s} className={progress >= i ? "complete" : ""}><span>{progress > i ? <Icon name="check" size={16}/> : i + 1}</span>{s}</li>)}</ol></div>;
+  if (processing) return <TrayScanner before={example ? undefined : before} after={example ? undefined : after} progress={progress}/>;
   return <>
     <PageHeading title="Foto ompreng" description="Dua foto, satu langkah kecil untuk dapur yang lebih terencana."/>
     <div className="capture-layout"><div className="panel capture-panel">
