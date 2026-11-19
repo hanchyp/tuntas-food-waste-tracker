@@ -1,0 +1,3 @@
+import { DemoProvider } from "@/components/demo-context";
+import DemoShell from "@/components/demo-shell";
+export default function Layout({ children }: { children: React.ReactNode }) { return <DemoProvider><DemoShell>{children}</DemoShell></DemoProvider>; }
