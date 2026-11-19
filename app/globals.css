@@ -162,6 +162,13 @@ select{appearance:none;padding-right:36px;background-image:url("data:image/svg+x
 label{display:flex;flex-direction:column;gap:7px;font-weight:650;font-size:13px}
 label>small{font-size:11px;font-weight:450;color:var(--muted);line-height:1.5}
 .form-error{color:var(--red);font-size:13px;padding:13px;background:#fff0ea;border-radius:10px;margin:15px 0}
+.result-back{margin-bottom:20px;font-size:12px}
+.result-layout{display:grid;grid-template-columns:1.65fr 1fr;gap:24px;margin-bottom:24px}
+.result-photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:0 24px}.result-photo-pair b{display:block;font-size:12px;text-align:center;margin-top:10px}.result-photos>.quiet{text-align:center;margin:16px 24px 22px;font-size:10px!important}
+.result-summary{padding:30px;display:flex;flex-direction:column;align-items:start;justify-content:center;background:#e8efda;border:0}.result-summary>svg{margin-bottom:18px}.result-summary h2{font-size:18px}.result-summary>strong{display:block;font-size:51px;line-height:1.2;letter-spacing:-.04em;margin-top:13px}.result-summary>strong small{font-size:24px;margin-left:8px}.result-summary>p{font-size:12px;margin-top:10px}.result-summary>div{border-top:1px solid #c7d3b5;margin-top:20px;padding-top:16px;width:100%;display:flex;gap:13px;align-items:center}.result-summary>div>b{font-size:24px;white-space:nowrap}.result-summary>div>span{font-size:11px;color:#506342}.result-summary>.quiet{font-size:10px!important;margin-top:20px}
 .food-name{display:flex;align-items:center;gap:12px}.food-name b{font-size:13px}.food-name>div>span{display:block;font-size:10px;color:var(--muted);margin-top:5px}.breakdown-table .food-icon{width:36px;height:36px}
+.percent-input{display:flex;flex-direction:row;align-items:center;gap:7px}.percent-input input{width:72px;font-size:13px;padding:8px}
+.edit-actions{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 24px}.edit-actions>p{font-size:12px}
+.recommendation{background:#eaf0df;border-radius:20px;display:flex;align-items:center;gap:25px;padding:20px 28px;margin-top:24px}.recommendation>img{height:130px;width:auto;flex-shrink:0}.recommendation h2{font-size:21px}.recommendation p{font-size:13px;margin:10px 0}.recommendation b{font-size:11px}
 .toast{position:fixed;bottom:26px;left:calc(50% + 100px);transform:translateX(-50%);z-index:40;background:var(--forest);color:white;padding:12px 22px;border-radius:12px;display:flex;gap:10px;align-items:center;font-size:13px;box-shadow:0 6px 24px #174d3b22;max-width:calc(100vw - 40px)}
 .loading{display:grid;place-items:center;min-height:50vh}
