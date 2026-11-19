@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-19T20:51:44.4771944+07:00",
+  "title": "Design System: TUNTAS",
+  "extensions": {
+    "colorMeta": {
+      "forest": {
+        "role": "primary",
+        "displayName": "Forest green"
+      },
+      "sun": {
+        "role": "secondary",
+        "displayName": "Sun yellow"
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Warm cream"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Dark green ink"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Landing headline",
+        "purpose": "Hero only; responsive overrides live in globals.css."
+      },
+      "headline": {
+        "displayName": "Application heading",
+        "purpose": "Page heading; use cascade-aware responsive sizes documented in DESIGN.md."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow",
+        "value": "0 12px 30px -16px #173d2a30",
+        "purpose": "Mobile landing navigation menu."
+      },
+      {
+        "name": "journey-label",
+        "value": "0 5px 12px -7px #194d3b50",
+        "purpose": "Numbered journey labels."
+      },
+      {
+        "name": "toast",
+        "value": "0 6px 24px #174d3b22",
+        "purpose": "Transient feedback."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button",
+        "value": "background .18s, transform .18s",
+        "purpose": "Hover lifts translateY(-2px); active returns to zero."
+      },
+      {
+        "name": "app-nav",
+        "value": "background .15s",
+        "purpose": "Navigation hover response."
+      },
+      {
+        "name": "porsi-greet",
+        "value": ".9s cubic-bezier(.16,1,.3,1) both",
+        "purpose": "One-time greeting under prefers-reduced-motion:no-preference."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation:none!important;transition:none!important",
+        "purpose": "All elements and pseudo-elements; HTML scrolling becomes auto."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide-min",
+        "value": "1600px"
+      },
+      {
+        "name": "compact-desktop-max",
+        "value": "1250px"
+      },
+      {
+        "name": "tablet-max",
+        "value": "1000px"
+      },
+      {
+        "name": "mobile-max",
+        "value": "760px"
+      },
+      {
+        "name": "narrow-max",
+        "value": "370px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Forest action button from the application UI.",
+      "html": "<button class=\"ds-btn\">Foto ompreng</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 23px;border:1px solid transparent;border-radius:999px;font-family:Jakarta,Arial,sans-serif;font-weight:750;font-size:15px;line-height:1.4;white-space:nowrap;background:var(--forest,#174d3b);color:white;cursor:pointer;transition:background .18s,transform .18s}.ds-btn:hover{background:#23684c;transform:translateY(-2px)}.ds-btn:active{transform:translateY(0)}.ds-btn:focus-visible{outline:3px solid #d29410;outline-offset:4px}.ds-btn:disabled{opacity:.5;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none!important}}"
+    },
+    {
+      "name": "Demo badge",
+      "kind": "chip",
+      "refersTo": "demo-badge",
+      "description": "Noninteractive simulation label; intentionally has no hover or active state.",
+      "html": "<span class=\"ds-demo\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v6M12 7h.01\"/></svg>Data simulasi</span>",
+      "css": ".ds-demo{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:#fff0bc;color:#614619;border-radius:999px;font-family:Jakarta,Arial,sans-serif;font-size:12px;font-weight:700;line-height:1.4;white-space:nowrap}"
+    },
+    {
+      "name": "Application field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Labeled text field using the application legibility override.",
+      "html": "<label class=\"ds-label\">Nama dapur<input class=\"ds-field\" value=\"Dapur Nusantara\"/></label>",
+      "css": ".ds-label{display:flex;flex-direction:column;gap:7px;font-family:Jakarta,Arial,sans-serif;font-weight:650;font-size:14px;color:var(--ink,#142e24)}.ds-field{background:#fffefb;border:1px solid #bfcbb9;border-radius:10px;padding:11px 13px;min-width:0;font:inherit;font-weight:400;line-height:1.4;caret-color:var(--forest,#174d3b);color:inherit}.ds-field:focus-visible{outline:3px solid #d29410;outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "B — Porsi besar dan alur yang ramah",
+    "overview": "Approved WANA-family direction: warm cream, forest green, yellow actions, rounded forms, and the original Porsi mascot. The landing makes the tray-to-decision journey visible; application screens prioritize structured kitchen data. This is an interactive prototype with clearly labeled simulations.",
+    "keyCharacteristics": [
+      "Original TUNTAS and Porsi assets",
+      "Friendly guidance around practical data",
+      "Explicit simulation labels"
+    ],
+    "rules": [],
+    "dos": [
+      "Do preserve brand assets and provenance.",
+      "Do retain keyboard focus and readable mobile table access.",
+      "Do consult final CSS overrides for responsive type."
+    ],
+    "donts": [
+      "Don't flatten interactive UI into imagery.",
+      "Don't present generated tray imagery or simulated results as pilot evidence.",
+      "Don't add shadows to every panel or import WANA domain content."
+    ]
+  }
+}

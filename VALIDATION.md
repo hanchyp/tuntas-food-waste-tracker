@@ -1,0 +1,49 @@
+# Prototype validation — 19 November 2026
+
+## Passed
+
+- Next.js production build, static generation of all routes, and TypeScript check.
+- Browser navigation from landing to dashboard, capture, results, history, shopping and reports.
+- Dashboard school filter changes sample totals and displayed data.
+- Capture rejects missing photo pairs; selecting example photos completes the three-step flow.
+- Simulated result is stored, editable, and preserved after a page reload. Editing vegetable leftover from 32% to 25% recalculates estimated sample waste.
+- History displays an empty state for a query with no matching menu.
+- Shopping at 500 portions and 5% buffer totals Rp2,942,813 with the default ingredients, stock and prices. Exported CSV was downloaded and inspected, including rows and total.
+- Zero shopping portions disables export and shows validation feedback.
+- Current pages /, /dasbor/, /foto/, /hasil/, /belanja/, /laporan/ have document scrollWidth equal to clientWidth at 390, 768 and 1536 CSS-pixel viewport widths. Wide tables scroll inside their containers.
+- No browser console errors during the final route/viewport pass.
+- Fresh independent finish review: ship as an interactive prototype, no material blocker within supplied screenshot and code-review scope. Approved concept B topology is preserved.
+
+## Verification limits
+
+- Native browser file-chooser automation was interrupted by a session expiry; device-file upload has not been exercised end-to-end. Its format/size handling, image conversion, and storage implementation were reviewed.
+- Browser automation could not commit date-field edits, so date filtering was reviewed in code but not confirmed through native date-input interaction.
+- Printed PDF output, complete keyboard traversal and instrumented contrast measurements were not independently checked.
+- The native Impeccable binary/detector was unavailable. Screenshots and code were reviewed instead.
+- This is not an accuracy or field-impact validation. Every new capture uses fixed simulation percentages, even for uploaded photos.
+
+## Publication
+
+A private Sites project identity is recorded in .openai/hosting.json. Source upload/publication did not run: automatic approval review rejected transferring source and static assets to the external Sites repository without explicit user permission for that destination. Do not retry or use another upload path without that permission.
+
+## Evidence
+
+The workspace-level .impeccable/review directory contains desktop and mobile browser captures. Original assets and generation prompts are documented in public/images/PROVENANCE.json.
+
+## Copy refinement
+
+Removed repeated simulation badges, global demo banner, proposal wording, and prototype footers at the user's request. Navigation now uses product actions such as “Buka dasbor”. The result-screen explanation and exported simulation provenance remain. Production build and TypeScript passed again; rendered landing and dashboard were checked, with no global simulation label/banner and no dashboard document overflow. Latest landing capture: ../.impeccable/review/preview-clean.jpg.
+
+## Tray-scan interaction
+
+Added a photo-based scan transition to the existing capture flow: bounded 4.7-second lifetime, yellow moving light, corner frame, before/after crossfade, four stages, and final check. CSS includes a stationary reduced-motion alternative. No AI service or photo measurement was added.
+
+Production build and TypeScript pass. Browser-tested at 390px and 1366px using example photos: scan animation computed as tray-sweep, focus at scanner-title, no mobile document overflow, before/after transition visible, and automatic result navigation reached on both viewports. Captures: ../.impeccable/review/scanning-mobile.jpg and scanning-desktop.jpg. Reduced-motion behavior was inspected in CSS, not exercised with a device preference change.
+
+## User-supplied demo photograph
+
+Default before image is now the user's original five-compartment steel-tray photo, copied unchanged (SHA-256 equality confirmed). After image was edited with image_gen.imagegen to preserve the same tray, wood table, lighting and plastic lid while reducing the meal to leftovers. Exact prompt and source are recorded in public/images/ompreng-demo.provenance.json and the main provenance ledger.
+
+Default demo meal names now match potato, fried chicken, green beans/carrot/edamame, and green grapes. Previously saved records were not reset. Both default photos use background-size contain, and the scanner uses the source 1339:1059 aspect ratio.
+
+Production build/TypeScript passed. Browser checks at 1280px confirmed the two new image URLs in the photo selector, contain rendering, new after image in the scan layer, no document overflow during scan, and navigation to a result with the matching menu/components. Screenshot: ../.impeccable/review/new-demo-photos.jpg.
