@@ -1,0 +1,12 @@
+{
+  "porsi-camera.png": {
+    "origin": "Generated with image_gen.imagegen on 23 November 2026, using the user's original Porsi as an identity reference.",
+    "reference": "/brand/porsi.png",
+    "prompt": "Create a new full-body pose of the EXACT original Porsi mascot from the reference, as a transparent-background PNG cutout. Faithfully preserve the broad olive-green rice-paddle-shaped head, dark forest-green small body and arms, two oval eyes, curved brows, happy cream-colored open smile, small feet, curled tail with yellow tip, flat hand-drawn 2D vector-like illustration, original outline weight and original proportions. It must look like another pose from the same original character sheet, not a redesigned mascot. No new clothing, no extra characters, no text or logo, no 3D rendering, no photographic shading, no background or floor. Keep complete silhouette with clear margin, natural two hands and two feet. Pose: Porsi holds a small warm-yellow compact camera with a forest-green lens in both hands at chest level, pointing the lens toward the viewer as if ready to photograph a meal tray. Head tilted subtly with a welcoming smile; both feet grounded; original face and head shape unobstructed. Camera is a simple prop that matches the flat illustration."
+  },
+  "porsi-plan.png": {
+    "origin": "Generated with image_gen.imagegen on 23 November 2026, using the user's original Porsi as an identity reference.",
+    "reference": "/brand/porsi.png",
+    "prompt": "Create a new full-body pose of the EXACT original Porsi mascot from the reference, as a transparent-background PNG cutout. Faithfully preserve the broad olive-green rice-paddle-shaped head, dark forest-green small body and arms, two oval eyes, curved brows, happy cream-colored open smile, small feet, curled tail with yellow tip, flat hand-drawn 2D vector-like illustration, original outline weight and original proportions. It must look like another pose from the same original character sheet, not a redesigned mascot. No new clothing, no extra characters, no text or logo, no 3D rendering, no photographic shading, no background or floor. Keep complete silhouette with clear margin, natural two hands and two feet. Pose: Porsi holds a cream clipboard with dark-green outline, yellow clip and three simple green check marks (no words) beside its torso in one hand, and gestures toward the clipboard with its other hand. A friendly kitchen-planning guide, cheerful original expression, complete silhouette, original curled tail visible."
+  }
+}

@@ -4,9 +4,6 @@
     "prompt": "Create a photorealistic website image asset matching only the food trays in the attached TUNTAS concept. Output a single landscape image, exactly two equal-width side-by-side photographs, no UI or typography or logo or mascot. Each half is a directly overhead top-down photograph of the SAME square stainless-steel Indonesian school-lunch tray, on an identical warm cream tabletop, fully visible with a small even margin. LEFT HALF BEFORE EATING: four compartments with white rice, cooked chicken, mixed green vegetables with carrots, and watermelon. RIGHT HALF AFTER EATING: the exact same tray orientation and menu, showing 18% rice remaining, 8% chicken scraps remaining, 32% vegetables remaining, 5% watermelon remaining, realistic thin food residue on metal. Neutral soft natural lighting, true proportions, appetizing original meal, polished but authentic kitchen photography. The two trays must have identical scale and placement within their respective halves. No decorative line between photos, no labels or captions. This image is an illustrative asset for a clearly labeled prototype. Do not reproduce any web UI from the reference.",
     "status": "Previous illustration, retained as source history; no longer the default demo photo."
   },
-  "../brand/*": {
-    "origin": "Original TUNTAS logo and Porsi mascot supplied by the user in D:/Kuliah/lomba/BPC-CIPTA-2. Copied unchanged."
-  },
   "../fonts/jakarta-latin.woff2": {
     "origin": "Plus Jakarta Sans variable Latin font from the local WANA Next.js Google Fonts cache; SIL Open Font License."
   },
@@ -18,5 +15,16 @@
     "origin": "AI-edited after-meal companion based on the user's original photograph, generated with image_gen.imagegen.",
     "role": "Illustrative after-meal photo, not a measured real observation",
     "prompt": "Use case: precise-object-edit. Edit the supplied real overhead lunch-tray photograph into the SAME photograph after the meal has been eaten. Preserve the original camera angle, crop, exact wide rectangular 5-compartment stainless-steel SUS304 tray shape, every compartment divider, engraving, blue-cool metal reflections, photographic imperfections, wood-grain table, shadows, lighting and overall scale. No redesigned tray, no studio restyling, no new plate, no extra food, no hands, no text overlay. Change ONLY the amount and arrangement of food left in its existing compartment: upper left retain a small natural cluster of green bean pieces and 1-2 carrot strips, around one third of the original vegetables, with a little realistic moisture; upper middle retain one small partially eaten potato-wedge fragment and a few crumbs, roughly one fifth of the original potato; upper right retain 2 edamame pods and a couple of empty opened husks rather than the full pile; lower left retain just one partly eaten green grape or a small piece and subtle grape-juice residue rather than three whole grapes; lower right replace the large fried chicken piece with a small believable chicken bone, a few bits of fried coating and tiny remaining meat scraps, most chicken eaten. Keep the round clear plastic cup/lid in the lower-right compartment in exactly its original position, size, orientation and appearance. Newly exposed metal must match the source's worn texture, cool color, highlights and reflections. Make this a minimally altered, highly faithful before/after companion photograph, not a different meal or setting. Maintain the source aspect ratio and show the complete original tray border exactly as in the input. Photorealistic, normal light mealtime residue, no excessive mess."
+  },
+  "../brand/{porsi,logo,logo-krem,ikon}.png": {
+    "origin": "Original TUNTAS logo and Porsi mascot supplied by the user in D:/Kuliah/lomba/BPC-CIPTA-2. Copied unchanged."
+  },
+  "../brand/porsi-camera.png": {
+    "origin": "AI-generated camera pose derived from the original user-supplied Porsi.",
+    "details": "../brand/POSES.provenance.json"
+  },
+  "../brand/porsi-plan.png": {
+    "origin": "AI-generated clipboard pose derived from the original user-supplied Porsi.",
+    "details": "../brand/POSES.provenance.json"
   }
 }
