@@ -29,6 +29,12 @@ export default function Capture() {
   const pending = useRef<Report | null>(null);
   useEffect(() => { const now = new Date(); setDate([now.getFullYear(), String(now.getMonth()+1).padStart(2,"0"), String(now.getDate()).padStart(2,"0")].join("-")); }, []);
   useEffect(() => {
+    if (processing || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const section = document.querySelector(".capture-panel .form-section");
+    const animation = section?.animate([{ opacity: .35, transform: "translateX(10px)" }, { opacity: 1, transform: "translateX(0)" }], { duration: 230, easing: "cubic-bezier(.22,1,.36,1)" });
+    return () => animation?.cancel();
+  }, [step, processing]);
+  useEffect(() => {
     if (!processing) return;
     const timer = setInterval(() => setProgress(p => Math.min(3, p + 1)), 1100);
     const finish = setTimeout(() => { if (pending.current) { addReport(pending.current); router.push("/hasil/?id=" + pending.current.id); } }, 4700);
@@ -71,6 +77,6 @@ export default function Capture() {
         {error && <p className="form-error" role="alert">{error}</p>}
         <div className="form-navigation">{step > 0 ? <button type="button" className="btn btn-outline" onClick={() => { setStep(s => s - 1); setError(""); }}>Kembali</button> : <span/>}<button className="btn btn-sun" type="submit" disabled={reading || !ready}>{step === 2 ? "Lihat hasil pengamatan" : "Lanjutkan"}<Icon name={step === 2 ? "chart" : "chevron"} size={18}/></button></div>
       </form>
-    </div><aside className="capture-help"><img src="/brand/porsi.png" alt="" width="170" height="175"/><h3>Hai, aku Porsi!</h3><p>Aku bantu kamu menyiapkan foto yang mudah dibandingkan.</p><ul><li><Icon name="check"/>Kamera tegak lurus dari atas.</li><li><Icon name="check"/>Gunakan ompreng yang sama.</li><li><Icon name="check"/>Jangan pindahkan sisa antarsekat.</li><li><Icon name="check"/>Jauhkan wajah dari bingkai foto.</li></ul><span className="quiet">Foto konsisten membantu evaluasi yang lebih baik.</span></aside></div>
+    </div><aside className="capture-help"><img src="/brand/porsi-camera.png" alt="" width="170" height="175"/><h3>Hai, aku Porsi!</h3><p>Aku bantu kamu menyiapkan foto yang mudah dibandingkan.</p><ul><li><Icon name="check"/>Kamera tegak lurus dari atas.</li><li><Icon name="check"/>Gunakan ompreng yang sama.</li><li><Icon name="check"/>Jangan pindahkan sisa antarsekat.</li><li><Icon name="check"/>Jauhkan wajah dari bingkai foto.</li></ul><span className="quiet">Foto konsisten membantu evaluasi yang lebih baik.</span></aside></div>
   </>;
 }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Brand, Icon } from "./ui";
 import { useDemo } from "./demo-context";
+import MotionSurface from "./motion-surface";
 const links = [
   { href: "/dasbor/", label: "Dasbor", icon: "grid" },
   { href: "/foto/", label: "Foto ompreng", icon: "camera" },
@@ -24,7 +25,7 @@ export default function DemoShell({ children }: { children: React.ReactNode }) {
     <div className="app-body">
       <header className="app-header"><div className="header-breadcrumb"><span className="desktop-only">Dapur Nusantara</span><span className="mobile-brand"><Brand/></span><span className="header-divider desktop-only">/</span><span className="desktop-only">{links.find(l => l.href === path)?.label ?? "Hasil analisis"}</span></div><div className="app-header-right"><span className="avatar" aria-label="Dapur Nusantara">DN</span></div></header>
       {warning && <div className="storage-warning" role="status">{warning}</div>}
-      <main id="app-main" className="app-main">{children}</main>
+      <main id="app-main" className="app-main"><MotionSurface key={path}>{children}</MotionSurface></main>
       <footer className="app-footer"><span>TUNTAS · Dapur lebih terencana.</span><span>© 2026 TUNTAS</span></footer>
     </div>
     <nav className="mobile-app-nav" aria-label="Navigasi aplikasi ponsel">{links.map(l => <Link key={l.href} href={l.href} className={path === l.href ? "active" : ""} aria-current={path === l.href ? "page" : undefined}><Icon name={l.icon} size={21}/><span>{l.icon === "cart" ? "Belanja" : l.icon === "camera" ? "Foto" : l.label}</span></Link>)}</nav>
