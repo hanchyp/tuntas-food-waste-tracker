@@ -46,3 +46,10 @@ Mengikuti pola gerak WANA: intro maskot singkat sekali per sesi, pengungkapan te
 Pose kamera dan papan belanja adalah varian AI dari maskot asli. Aset ada di public/brand/porsi-camera.png dan porsi-plan.png; prompt persis dan sumber ada di public/brand/POSES.provenance.json. Maskot asli tidak diganti.
 
 Gerak memakai CSS dan Web Animations API tanpa dependensi tambahan. Semua rangkaian dibatasi waktunya; animasi reveal dihentikan ketika tab disembunyikan dan dilewati saat prefers-reduced-motion aktif. Halaman tetap terbaca jika JavaScript/observer tidak tersedia. Intro bisa dilewati dan tidak dipakai di halaman operasional.
+
+
+### Foto langsung di ponsel
+
+Pada langkah Pasangan foto, pilih **Buka kamera** untuk foto sebelum atau sesudah makan. Arahkan seluruh ompreng ke bingkai, ambil foto, lalu pilih **Gunakan foto**; **Foto ulang** membuka kamera kembali. Pilihan **Galeri** tersedia di layar kamera maupun pada setiap pasangan foto. Mendukung JPG, PNG, dan WebP hingga 10 MB.
+
+Kamera belakang diprioritaskan dan hanya diminta setelah menekan Buka kamera. Gunakan HTTPS untuk mengakses kamera dari HP; HTTP melalui alamat IP jaringan lokal tidak menyediakan akses kamera. Foto diperkecil dan disimpan di browser, tanpa mengirimnya ke server analisis.

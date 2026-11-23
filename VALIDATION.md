@@ -55,3 +55,14 @@ Added two alpha-transparent Porsi variants (camera and clipboard); both retain t
 Added once-per-session welcome/replay, explicit skip, Porsi greeting, interactive workflow steps, one-shot text/photo/card/chart reveals, app panel transitions, and 230ms capture-step transitions. Native CSS/Web Animations API only. Reduced-motion and tab-hidden/unmount cleanup are implemented.
 
 Production build and TypeScript passed. Browser checks confirmed greeting text, stage-specific links, intro status/inert content then restored page, all three stage controls visible at 390/820/1536px, no landing overflow at these widths, correct planning/camera pose URLs, no mobile capture/shopping overflow, full example-photo capture to results, and no console errors. Reduced-motion was inspected in implementation, not exercised by changing device preferences. CDP full-page screenshot capture timed out; the documented native screenshot alternative worked. Mobile greeting evidence is saved in ../.impeccable/review/porsi-motion-mobile.jpg.
+
+
+## Mobile camera and gallery - 23 November 2026
+
+Added an explicit rear-camera request, QRIS-style tray corner frame, large shutter, photo review/retake/confirm, and gallery selection inside the camera screen. Camera tracks stop on review, close, unmount, or hidden tab; late permission responses are disposed after closing. Permission failures offer retry and gallery. Microphone is never requested. Images keep the complete frame, resize to a maximum 900px edge, and encode JPEG at 0.7 quality before local storage.
+
+The pair selector provides separate camera and gallery actions for before/after photos, stacks vertically on phones, hides form navigation while the camera is open, and restores focus to the originating camera button. Existing sample photos and staged result animation remain available.
+
+Production build and TypeScript passed. Browser verification at 390x844 confirmed camera opening/closing, heading focus and return focus, gallery uploads both directly and inside the camera screen, review/confirmation, and progression with both uploaded photos to the final review. No horizontal overflow; the 76px shutter stays above mobile navigation. Camera viewfinder and container both measure 324px wide. Screenshots: ../.impeccable/review/mobile-camera.jpg and mobile-camera-preview.jpg.
+
+The test browser left live camera permission pending, so physical camera capture, permission denial/retry, and real iOS/Android hardware behavior remain unverified. Live camera requires HTTPS or localhost; a phone visiting a plain HTTP LAN address can use the gallery fallback. Framing assists composition only; no live food detection or AI measurement was added.
