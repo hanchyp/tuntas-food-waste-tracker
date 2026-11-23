@@ -6,18 +6,9 @@ import { Icon, TrayPhoto } from "./ui";
 import { PageHeading } from "./dashboard";
 import { components, dateLabel, schools, type Report } from "@/lib/data";
 import TrayScanner from "./tray-scanner";
+import MealCamera from "./meal-camera";
+import { readImage } from "@/lib/photo";
 
-async function readImage(file: File) {
-  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) throw new Error("Gunakan foto JPG, PNG, atau WebP.");
-  if (file.size > 10 * 1024 * 1024) throw new Error("Foto maksimal 10 MB. Pilih foto yang lebih kecil.");
-  const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, 900 / Math.max(bitmap.width, bitmap.height));
-  const canvas = document.createElement("canvas"); canvas.width = Math.round(bitmap.width * scale); canvas.height = Math.round(bitmap.height * scale);
-  const context = canvas.getContext("2d");
-  if (!context) { bitmap.close(); throw new Error("Foto tidak dapat diproses. Coba browser lain."); }
-  context.drawImage(bitmap, 0, 0, canvas.width, canvas.height); bitmap.close();
-  return canvas.toDataURL("image/jpeg", 0.7);
-}
 export default function Capture() {
   const router = useRouter(); const { addReport, ready } = useDemo();
   const [step, setStep] = useState(0); const [school, setSchool] = useState(schools[0]);
@@ -27,6 +18,8 @@ export default function Capture() {
   const [example, setExample] = useState(false); const [error, setError] = useState("");
   const [reading, setReading] = useState(false); const [processing, setProcessing] = useState(false); const [progress, setProgress] = useState(0);
   const pending = useRef<Report | null>(null);
+  const [cameraSide, setCameraSide] = useState<"before" | "after">();
+  function closeCamera() { const side = cameraSide; setCameraSide(undefined); requestAnimationFrame(() => document.querySelector<HTMLButtonElement>(`[data-camera-side="${side}"]`)?.focus()); }
   useEffect(() => { const now = new Date(); setDate([now.getFullYear(), String(now.getMonth()+1).padStart(2,"0"), String(now.getDate()).padStart(2,"0")].join("-")); }, []);
   useEffect(() => {
     if (processing || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -71,11 +64,12 @@ export default function Capture() {
           <div className="form-grid"><label>Ompreng sampel<input type="number" min="1" max="10000" required value={samples || ""} onChange={e => setSamples(Number(e.target.value))}/><small>Jumlah ompreng yang diwakili pencatatan.</small></label><label>Porsi distribusi<input type="number" min={samples || 1} max="10000" required value={portions || ""} onChange={e => setPortions(Number(e.target.value))}/><small>Total porsi untuk sekolah ini.</small></label></div>
           <div className="inline-note"><Icon name="info" size={18}/>Catat setiap ompreng secara konsisten agar sampel dapat dibandingkan antarmenu dan sekolah.</div>
         </div>}
-        {step === 1 && <div className="form-section"><h2>Foto sebelum dan sesudah.</h2><p>Ambil dari atas, seluruh sekat terlihat, dengan pencahayaan yang sama.</p><button type="button" className="btn btn-outline example-button" onClick={() => { setExample(true); setMenu("Ayam goreng, kentang & sayuran"); setBefore(undefined); setAfter(undefined); setError(""); }}><Icon name="camera" size={18}/>Gunakan foto contoh</button>
-          <div className="photo-upload-grid">{(["before", "after"] as const).map((side, i) => { const src = side === "before" ? before : after; return <div className="photo-upload" key={side}><h3>{i === 0 ? "Sebelum makan" : "Sesudah makan"}</h3>{(example || src) ? <TrayPhoto after={i === 1} src={src}/> : <div className="upload-placeholder"><Icon name="camera" size={38}/><p>Seluruh ompreng terlihat</p></div>}<label className="btn btn-outline upload-label">{reading ? "Memproses foto…" : src ? "Ganti foto" : "Pilih foto"}<input type="file" accept="image/jpeg,image/png,image/webp" disabled={reading} aria-label={i === 0 ? "Unggah foto sebelum makan" : "Unggah foto sesudah makan"} onChange={e => upload(e.target.files?.[0], side)}/><Icon name="upload" size={17}/></label><small>{example ? "Ilustrasi contoh dipilih" : src ? "Foto siap digunakan" : "JPG, PNG, WebP · maks. 10 MB"}</small></div>; })}</div><div className="inline-note"><Icon name="info" size={18}/>Foto disimpan di browser ini. Hindari wajah siswa dan informasi pribadi.</div></div>}
+        {step === 1 && cameraSide && <MealCamera key={cameraSide} side={cameraSide} onClose={closeCamera} onUse={image => { if (cameraSide === "before") setBefore(image); else setAfter(image); setExample(false); setError(""); closeCamera(); }}/> }
+        {step === 1 && !cameraSide && <div className="form-section"><h2>Foto sebelum dan sesudah.</h2><p>Foto langsung dari kamera atau pilih dari galeri. Mulai dari sebelum makan, lalu sesudah makan.</p><button type="button" className="btn btn-outline example-button" onClick={() => { setExample(true); setMenu("Ayam goreng, kentang & sayuran"); setBefore(undefined); setAfter(undefined); setError(""); }}><Icon name="camera" size={18}/>Gunakan foto contoh</button>
+          <div className="photo-upload-grid">{(["before", "after"] as const).map((side, i) => { const src = side === "before" ? before : after; return <div className="photo-upload" key={side}><h3>{i === 0 ? "Sebelum makan" : "Sesudah makan"}</h3>{(example || src) ? <TrayPhoto after={i === 1} src={src}/> : <div className="upload-placeholder"><Icon name="camera" size={38}/><p>Seluruh ompreng terlihat</p></div>}<button type="button" className="btn btn-primary photo-camera-button" disabled={reading} data-camera-side={side} onClick={() => setCameraSide(side)}><Icon name="camera" size={18}/>{src || example ? "Foto ulang" : "Buka kamera"}</button><label className="btn btn-outline upload-label">{reading ? "Memproses foto…" : src ? "Ganti dari galeri" : "Pilih dari galeri"}<input type="file" accept="image/jpeg,image/png,image/webp" disabled={reading} aria-label={i === 0 ? "Unggah foto sebelum makan" : "Unggah foto sesudah makan"} onChange={e => { void upload(e.target.files?.[0], side); e.target.value = ""; }}/><Icon name="upload" size={17}/></label><small>{example ? "Ilustrasi contoh dipilih" : src ? "Foto siap digunakan" : "JPG, PNG, WebP · maks. 10 MB"}</small></div>; })}</div><div className="inline-note"><Icon name="info" size={18}/>Foto disimpan di browser ini. Hindari wajah siswa dan informasi pribadi.</div></div>}
         {step === 2 && <div className="form-section"><h2>Siap melihat hasil pengamatan?</h2><p>Periksa kembali data pencatatanmu.</p><dl className="review-data"><div><dt>Sekolah</dt><dd>{school}</dd></div><div><dt>Menu</dt><dd>{menu}</dd></div><div><dt>Tanggal</dt><dd>{dateLabel(date)}</dd></div><div><dt>Cakupan</dt><dd>{samples} sampel dari {portions} porsi</dd></div></dl><div className="review-photos"><TrayPhoto src={before}/><TrayPhoto after src={after}/></div></div>}
         {error && <p className="form-error" role="alert">{error}</p>}
-        <div className="form-navigation">{step > 0 ? <button type="button" className="btn btn-outline" onClick={() => { setStep(s => s - 1); setError(""); }}>Kembali</button> : <span/>}<button className="btn btn-sun" type="submit" disabled={reading || !ready}>{step === 2 ? "Lihat hasil pengamatan" : "Lanjutkan"}<Icon name={step === 2 ? "chart" : "chevron"} size={18}/></button></div>
+        {!cameraSide && <div className="form-navigation">{step > 0 ? <button type="button" className="btn btn-outline" onClick={() => { setStep(s => s - 1); setError(""); }}>Kembali</button> : <span/>}<button className="btn btn-sun" type="submit" disabled={reading || !ready}>{step === 2 ? "Lihat hasil pengamatan" : "Lanjutkan"}<Icon name={step === 2 ? "chart" : "chevron"} size={18}/></button></div>}
       </form>
     </div><aside className="capture-help"><img src="/brand/porsi-camera.png" alt="" width="170" height="175"/><h3>Hai, aku Porsi!</h3><p>Aku bantu kamu menyiapkan foto yang mudah dibandingkan.</p><ul><li><Icon name="check"/>Kamera tegak lurus dari atas.</li><li><Icon name="check"/>Gunakan ompreng yang sama.</li><li><Icon name="check"/>Jangan pindahkan sisa antarsekat.</li><li><Icon name="check"/>Jauhkan wajah dari bingkai foto.</li></ul><span className="quiet">Foto konsisten membantu evaluasi yang lebih baik.</span></aside></div>
   </>;
