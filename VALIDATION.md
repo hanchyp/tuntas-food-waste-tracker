@@ -47,3 +47,11 @@ Default before image is now the user's original five-compartment steel-tray phot
 Default demo meal names now match potato, fried chicken, green beans/carrot/edamame, and green grapes. Previously saved records were not reset. Both default photos use background-size contain, and the scanner uses the source 1339:1059 aspect ratio.
 
 Production build/TypeScript passed. Browser checks at 1280px confirmed the two new image URLs in the photo selector, contain rendering, new after image in the scan layer, no document overflow during scan, and navigation to a result with the matching menu/components. Screenshot: ../.impeccable/review/new-demo-photos.jpg.
+
+## WANA-inspired motion — 23 November 2026
+
+Added two alpha-transparent Porsi variants (camera and clipboard); both retain the original as reference and have exact prompts in public/brand/POSES.provenance.json. Original mascot remains the landing focal asset.
+
+Added once-per-session welcome/replay, explicit skip, Porsi greeting, interactive workflow steps, one-shot text/photo/card/chart reveals, app panel transitions, and 230ms capture-step transitions. Native CSS/Web Animations API only. Reduced-motion and tab-hidden/unmount cleanup are implemented.
+
+Production build and TypeScript passed. Browser checks confirmed greeting text, stage-specific links, intro status/inert content then restored page, all three stage controls visible at 390/820/1536px, no landing overflow at these widths, correct planning/camera pose URLs, no mobile capture/shopping overflow, full example-photo capture to results, and no console errors. Reduced-motion was inspected in implementation, not exercised by changing device preferences. CDP full-page screenshot capture timed out; the documented native screenshot alternative worked. Mobile greeting evidence is saved in ../.impeccable/review/porsi-motion-mobile.jpg.

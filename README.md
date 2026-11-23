@@ -38,3 +38,11 @@ Logo dan Porsi berasal dari aset asli pengguna, disalin tanpa perubahan visual. 
 ## Pengembangan berikutnya
 
 Backend dan akun dapur, penyimpanan foto terpisah per tenant, model segmentasi terkalibrasi, dataset uji berlabel/ditimbang, persetujuan ahli gizi, serta pelaporan sesuai format yang telah diverifikasi adalah pekerjaan lanjutan. Semua klaim akurasi dan dampak membutuhkan validasi lapangan.
+
+## Animasi dan Porsi
+
+Mengikuti pola gerak WANA: intro maskot singkat sekali per sesi, pengungkapan teks/foto saat digulir, dan transisi status aplikasi. Klik Porsi di hero untuk menyapa, klik tahap foto/hasil/belanja untuk menjelajahi alur, atau gunakan “Putar sapaan Porsi” di footer untuk memutar intro lagi.
+
+Pose kamera dan papan belanja adalah varian AI dari maskot asli. Aset ada di public/brand/porsi-camera.png dan porsi-plan.png; prompt persis dan sumber ada di public/brand/POSES.provenance.json. Maskot asli tidak diganti.
+
+Gerak memakai CSS dan Web Animations API tanpa dependensi tambahan. Semua rangkaian dibatasi waktunya; animasi reveal dihentikan ketika tab disembunyikan dan dilewati saat prefers-reduced-motion aktif. Halaman tetap terbaca jika JavaScript/observer tidak tersedia. Intro bisa dilewati dan tidak dipakai di halaman operasional.
