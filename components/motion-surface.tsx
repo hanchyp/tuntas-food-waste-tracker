@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { INTRO_REPLAY_EVENT, consumeIntroReplay } from "@/lib/intro-replay";
 
 const INTRO_KEY = "tuntas-porsi-welcome-v1";
 const EASE = "cubic-bezier(.22,1,.36,1)";
@@ -16,6 +17,16 @@ export default function MotionSurface({ children, intro = false, replayKey = 0 }
     try { sessionStorage.setItem(INTRO_KEY, "seen"); } catch { /* Session storage is optional. */ }
   }, []);
 
+  // Logo clicks (from any page, including this one) always replay the welcome from the top.
+  const [logoReplay, setLogoReplay] = useState(0);
+  useEffect(() => {
+    if (!intro) return;
+    const replay = () => { consumeIntroReplay(); window.scrollTo({ top: 0, left: 0, behavior: "instant" }); setLogoReplay(n => n + 1); };
+    if (consumeIntroReplay()) replay();
+    window.addEventListener(INTRO_REPLAY_EVENT, replay);
+    return () => window.removeEventListener(INTRO_REPLAY_EVENT, replay);
+  }, [intro]);
+
   useEffect(() => {
     if (!intro) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -23,14 +34,15 @@ export default function MotionSurface({ children, intro = false, replayKey = 0 }
     }
     let seen = false;
     try { seen = sessionStorage.getItem(INTRO_KEY) === "seen"; } catch { /* Still usable without storage. */ }
-    if (seen && replayKey === 0) { setReady(true); return; }
+    if (seen && replayKey === 0 && logoReplay === 0) { setReady(true); return; }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     setWelcoming(true); setReady(false);
     const timer = window.setTimeout(finishWelcome, 1150);
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const reduce = () => { if (media.matches) finishWelcome(); };
     media.addEventListener("change", reduce);
     return () => { clearTimeout(timer); media.removeEventListener("change", reduce); };
-  }, [intro, replayKey, finishWelcome]);
+  }, [intro, replayKey, logoReplay, finishWelcome]);
 
   useEffect(() => {
     const scope = root.current;
@@ -92,7 +104,6 @@ export default function MotionSurface({ children, intro = false, replayKey = 0 }
   return <>
     <div ref={root} className="motion-surface" inert={welcoming}>{children}</div>
     {welcoming && <div className="porsi-intro" role="status" aria-label="Porsi menyambutmu di TUNTAS">
-      <button className="intro-skip" onClick={finishWelcome}>Lewati intro</button>
       <div className="intro-center"><img src="/brand/logo.png" alt="TUNTAS" width="300" height="60"/><p>Kenali sisanya. Rencanakan berikutnya.</p><span className="intro-track" aria-hidden="true"><i/></span></div>
       <img className="intro-porsi intro-porsi-camera" src="/brand/porsi-camera.png" alt="" width="450" height="480"/>
       <img className="intro-porsi intro-porsi-plan" src="/brand/porsi-plan.png" alt="" width="450" height="480"/>

@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
+import HomeLink from "./home-link";
 
 const paths: Record<string, React.ReactNode> = {
   grid: <><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></>,
@@ -32,7 +33,7 @@ export function Icon({ name, size = 22, className = "" }: { name: string; size?:
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>{paths[name] ?? paths.leaf}</svg>;
 }
 export function Brand({ light = false }: { light?: boolean }) {
-  return <Link href="/" aria-label="TUNTAS — Beranda" className="brand"><img src={light ? "/brand/logo-krem.png" : "/brand/logo.png"} alt="TUNTAS" width="203" height="40"/></Link>;
+  return <HomeLink ariaLabel="TUNTAS — Beranda" className="brand"><img src={light ? "/brand/logo-krem.png" : "/brand/logo.png"} alt="TUNTAS" width="203" height="40"/></HomeLink>;
 }
 export function TrayPhoto({ after = false, src, className = "" }: { after?: boolean; src?: string; className?: string }) {
   const photo = src ?? (after ? "/images/ompreng-sesudah.png" : "/images/ompreng-sebelum.png");
