@@ -75,3 +75,12 @@ The test browser left live camera permission pending, so physical camera capture
 - Shopping defaults now follow the demo menu: kentang, ayam, buncis/wortel/edamame and anggur hijau. The Rp2,942,813 figure above used the old ingredient list. With the new defaults, 500 portions at a 5% buffer total Rp5,729,500 (calculated, not browser-tested).
 - The dashboard period label now says "7 hari hingga catatan terakhir", matching how it filters.
 - The report period defaults to the calendar month of the latest record instead of a fixed November 2026 range.
+
+## WANA-style UI/UX pass — 24 November 2026
+
+- Added `app/polish.css`: sticker cards (2px forest outline, solid 4px shadow) on stats, result summary, pricing and the feature story; sticky header that compacts on scroll; mobile header "Foto" action.
+- App pages no longer replay entrance animations on every visit. Motion now marks status instead: stat and result numbers count up, the active capture step pulses, completed steps and saved estimates pop, toast icons pop. All are disabled under reduced motion.
+- Mobile: capture navigation stays above the bottom bar; results get a fixed "Susun belanja" action; shopping gets a fixed total with export; the dashboard banner is compact so stats appear on the first screen; duplicate top actions are hidden.
+- Landing: hero buttons are full width on phones; features use a pinned scroll story (photo, components, purchasing) with dots, falling back to a static list without JS, on short screens, or with reduced motion.
+- Results replace the info notice with a "Yang sudah dicatat" checklist and a limitation box. Sidebar Porsi is hidden where Porsi is already on the page.
+- Typecheck and production build pass. Browser-checked at 375×812 and 1366×820: no horizontal overflow, pinned story switches at each third, example-photo capture reaches results, saving an estimate pops the values. Reduced-motion was reviewed in CSS only.

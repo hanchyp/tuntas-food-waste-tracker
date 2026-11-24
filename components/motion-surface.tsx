@@ -38,7 +38,8 @@ export default function MotionSurface({ children, intro = false, replayKey = 0 }
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const animations = new Set<Animation>();
     const seen = new WeakSet<Element>();
-    const selector = "[data-motion], .app-main .page-heading, .app-main .panel, .app-main .dashboard-welcome, .app-main .planning-tip, .app-main .recommendation";
+    // Operational pages stay still on every visit; only marked elements (landing, charts) reveal.
+    const selector = "[data-motion]";
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;

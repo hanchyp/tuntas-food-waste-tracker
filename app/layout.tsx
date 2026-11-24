@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./motion.css";
 import "./camera.css";
+import "./polish.css";
 
 export const metadata: Metadata = {
   title: { default: "TUNTAS — Foto ompreng. Belanja tepat.", template: "%s · TUNTAS" },

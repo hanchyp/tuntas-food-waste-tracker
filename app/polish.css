@@ -1,0 +1,117 @@
+/* WANA-style polish: sticker cards, status motion, mobile actions and the pinned feature story.
+   Loaded after globals.css, motion.css and camera.css so these rules win the cascade. */
+:root{--sticker:0 4px 0 0 var(--forest);--mobile-nav-h:71px}
+
+/* Sticker cards: 2px forest outline with a solid offset shadow, for the few cards that matter most. */
+.sticker{border:2px solid var(--forest)!important;box-shadow:var(--sticker)}
+.price-pro.sticker{border-color:var(--deep)!important;box-shadow:0 4px 0 0 var(--deep)}
+.stat.sticker{border-radius:18px}
+.stat.sticker>strong{font-size:34px}
+.result-summary.sticker{background:#e8efda}
+.sticker-inset{border-top:2px solid var(--forest)}
+.count-up{font-variant-numeric:tabular-nums}
+
+/* Result transparency, modeled on WANA's checklist plus limitation box. */
+.estimate-check{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;padding:22px 24px;margin-bottom:24px;border:2px solid #cfdcc6}
+.estimate-check h2{font-size:16px;margin-bottom:12px}
+.estimate-check ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.estimate-check li{display:flex;gap:11px;align-items:flex-start;font-size:14px;line-height:1.5}
+.check-dot{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#dbeccd;color:var(--forest);flex-shrink:0;margin-top:-1px}
+.estimate-limit{display:flex;gap:11px;align-items:flex-start;background:#f6ede3;color:#5b4330;border-radius:14px;padding:16px 17px;align-self:start}
+.estimate-limit svg{flex-shrink:0;margin-top:2px}
+.estimate-limit p{font-size:13px;line-height:1.6;color:inherit}
+
+/* Status motion: feedback for what is happening now, not page entrances. */
+@keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.1);opacity:1}100%{transform:scale(1)}}
+@keyframes pulse-sun{0%{box-shadow:0 0 0 0 #ffce3b99}100%{box-shadow:0 0 0 11px #ffce3b00}}
+.pop{display:inline-block;animation:pop .6s cubic-bezier(.34,1.56,.64,1) both}
+.toast>svg{animation:pop .5s .05s cubic-bezier(.34,1.56,.64,1) both}
+.stepper li.active>span{animation:pulse-sun 1.6s ease-out infinite}
+.stepper li.done>span{animation:pop .45s cubic-bezier(.34,1.56,.64,1) both}
+
+/* App header: sticky, compacts once the page scrolls. */
+.app-header{position:sticky;top:0;z-index:20;transition:height .2s ease,box-shadow .2s ease}
+.app-header.is-scrolled{height:62px;box-shadow:0 8px 20px -14px #173d2a66}
+.app-header-right{display:flex;align-items:center;gap:10px}
+.header-cta{display:none}
+
+/* Fixed mobile actions sit above the bottom navigation. */
+.mobile-cta{display:none}
+
+/* Pinned feature story (landing). Static list by default; .is-pinned is added by JS. */
+.story-sticky{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:center}
+.story-visual{background:white;border-radius:24px;padding:30px}
+.story .feature-bar>span{width:92px}
+.story-copy article{display:flex;gap:20px;padding:23px 0;border-bottom:1px solid var(--line)}
+.story-copy article:last-of-type{border:0}
+.story-copy article>span{background:var(--pale);color:var(--forest);padding:11px;border-radius:14px;height:fit-content}
+.story-copy h3{font-size:21px;margin-bottom:8px}
+.story-copy p{font-size:15px}
+.story-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.story-photos span{display:block;text-align:center;font-size:12px;font-weight:650;margin-top:8px;color:var(--muted)}
+.story-buy{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.story-buy b{margin-left:auto;font-variant-numeric:tabular-nums}
+.story-buy small{font-weight:600;color:var(--muted)}
+.story-buy-total{display:flex;justify-content:space-between;align-items:center;margin-top:16px;background:var(--pale);color:var(--forest);border-radius:12px;padding:12px 14px;font-size:13px;font-weight:700}
+.story.is-pinned{height:290svh}
+.story.is-pinned .story-sticky{position:sticky;top:0;height:100svh;align-content:center}
+.story.is-pinned .story-visual{display:grid}
+.story-layer{grid-area:1/1;align-self:center;opacity:0;transform:translateY(18px) scale(.97);transition:opacity .45s ease,transform .5s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.story-layer[data-active=true]{opacity:1;transform:none}
+.story.is-pinned .story-copy{display:grid}
+.story.is-pinned .story-copy article{grid-area:1/1;border:0;opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+.story.is-pinned .story-copy article[data-active=true]{opacity:1;transform:none}
+.story.is-pinned .story-copy article h3{font-size:30px;letter-spacing:-.03em}
+.story.is-pinned .story-copy article p{font-size:17px}
+.story-dots{display:flex;gap:7px;padding-top:18px}
+.story-dots button{width:26px;height:5px;border-radius:9px;border:0;padding:0;background:#cfd9c7;transition:width .3s,background .3s;cursor:pointer}
+.story-dots button[aria-pressed=true]{width:44px;background:var(--forest)}
+
+@media(max-width:1000px){
+  .story-sticky{gap:34px}
+  .story.is-pinned .story-copy article h3{font-size:25px}
+}
+
+@media(max-width:760px){
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-actions .btn{width:100%;justify-content:center}
+
+  .story-sticky{grid-template-columns:1fr;gap:20px}
+  .story-visual{padding:20px;border-radius:20px}
+  .story.is-pinned{height:270svh}
+  .story.is-pinned .story-sticky{align-content:center;padding-block:20px}
+  .story.is-pinned .story-copy article h3{font-size:24px}
+  .story.is-pinned .story-copy article p{font-size:15px}
+  .story-copy article{gap:14px}
+
+  .estimate-check{grid-template-columns:1fr;padding:19px;gap:16px}
+
+  .app-header.is-scrolled{height:56px}
+  .page-actions .btn[href="/foto/"],.page-actions .hide-mobile{display:none}
+  .header-cta{display:inline-flex;padding:8px 14px;font-size:13px;border:2px solid var(--forest);box-shadow:0 3px 0 0 var(--forest)}
+
+  .dashboard-welcome{min-height:0;padding:18px 18px 18px 20px;margin-bottom:20px}
+  .dashboard-welcome>div:first-child{max-width:62%}
+  .dashboard-welcome h2{font-size:22px}
+  .dashboard-welcome p,.dashboard-welcome .welcome-tip{display:none}
+  .dashboard-welcome>img{width:104px;height:auto;position:absolute;right:12px;bottom:-14px}
+  .stat.sticker>strong{font-size:28px}
+
+  .mobile-cta{display:flex;position:fixed;left:14px;right:14px;bottom:calc(var(--mobile-nav-h) + 10px);z-index:25}
+  .mobile-cta>.btn{flex:1;justify-content:center;border:2px solid var(--forest);box-shadow:var(--sticker)}
+  .mobile-cta-total{background:#fffef9;border:2px solid var(--forest);border-radius:18px;padding:9px 9px 9px 16px;align-items:center;justify-content:space-between;gap:12px;box-shadow:var(--sticker)}
+  .mobile-cta-total>span{display:flex;flex-direction:column;font-size:11px;color:var(--muted);font-weight:650}
+  .mobile-cta-total strong{font-size:18px;color:var(--ink);font-variant-numeric:tabular-nums}
+  .mobile-cta-total>.btn{flex:0 0 auto;box-shadow:none;border:0}
+  .app-main:has(.mobile-cta){padding-bottom:96px}
+  .app-main:has(.mobile-cta) .toast{bottom:calc(var(--mobile-nav-h) + 84px)}
+
+  .capture-panel{overflow:visible}
+  .capture-panel .form-navigation{position:sticky;bottom:var(--mobile-nav-h);z-index:6;background:#fffefa;margin:20px -19px -22px;padding:14px 19px;border-radius:0 0 17px 17px;box-shadow:0 -10px 18px -16px #173d2a55}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .pop,.toast>svg,.stepper li.active>span,.stepper li.done>span{animation:none}
+  .app-header,.story-layer,.story-copy article,.story-dots button{transition:none!important}
+}
+@media print{.mobile-cta,.header-cta{display:none!important}.app-header{position:static}}
