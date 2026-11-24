@@ -49,7 +49,7 @@ export default function Capture() {
   }
   function analyze() {
     if (!ready || reading || processing) return;
-    pending.current = { id: "TNT-" + Date.now(), school, date, menu: menu.trim(), samples, portions, components: components.map(c => ({ ...c, food: menu.includes("panggang") ? ({ Kentang: "Kentang panggang", Lauk: "Ayam panggang", Sayur: "Capcai", Buah: "Semangka" }[c.name] ?? c.food) : c.food })), before: example ? undefined : before, after: example ? undefined : after, source: example ? "contoh" : "unggahan" };
+    pending.current = { id: "TNT-" + Date.now(), school, date, menu: menu.trim(), samples, portions, components: components.map(c => ({ ...c, food: menu.includes("panggang") ? ({ Karbohidrat: "Nasi putih", Lauk: "Ayam panggang", Sayur: "Capcai", Buah: "Semangka" }[c.name] ?? c.food) : c.food })), before: example ? undefined : before, after: example ? undefined : after, source: example ? "contoh" : "unggahan" };
     setProcessing(true);
   }
   if (processing) return <TrayScanner before={example ? undefined : before} after={example ? undefined : after} progress={progress}/>;

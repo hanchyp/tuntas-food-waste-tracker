@@ -16,7 +16,7 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const [warning, setWarning] = useState("");
   useEffect(() => {
-    try { const raw = localStorage.getItem(KEY); if (raw) { const data: unknown = JSON.parse(raw); if (Array.isArray(data) && data.every(validReport)) setReports(data); else setWarning("Data tersimpan tidak dapat dibaca. Contoh awal ditampilkan kembali."); } }
+    try { const raw = localStorage.getItem(KEY); if (raw) { const data: unknown = JSON.parse(raw); if (Array.isArray(data) && data.every(validReport)) setReports(data.map(r => ({ ...r, components: r.components.map(c => c.name === "Kentang" ? { ...c, name: "Karbohidrat" } : c) }))); else setWarning("Data tersimpan tidak dapat dibaca. Contoh awal ditampilkan kembali."); } }
     catch { setWarning("Penyimpanan browser tidak tersedia. Aplikasi tetap bisa dipakai selama halaman terbuka."); }
     setReady(true);
   }, []);

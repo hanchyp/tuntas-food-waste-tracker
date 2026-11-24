@@ -84,7 +84,7 @@ export default function Landing() {
           </div>
           <div className="feature-list">
             <article><span><Icon name="camera"/></span><div><h3>Foto, tanpa alat khusus</h3><p>Dokumentasikan sampel ompreng sebelum dan sesudah makan dari ponsel.</p></div></article>
-            <article><span><Icon name="chart"/></span><div><h3>Lihat per komponen</h3><p>Bedakan sisa nasi, lauk, sayur, dan buah. Jangan biarkan semuanya menjadi satu angka.</p></div></article>
+            <article><span><Icon name="chart"/></span><div><h3>Lihat per komponen</h3><p>Bedakan sisa karbohidrat, lauk, sayur, dan buah. Jangan biarkan semuanya menjadi satu angka.</p></div></article>
             <article><span><Icon name="cart"/></span><div><h3>Hubungkan ke kebutuhan bahan</h3><p>Tinjau rencana belanja dalam kilogram, sesuaikan porsi, lalu ekspor untuk pemasok.</p></div></article>
           </div>
         </div>

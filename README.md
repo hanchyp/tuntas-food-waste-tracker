@@ -19,11 +19,11 @@ Konfigurasi menggunakan static export, sehingga next start tidak digunakan. Skri
 - /hasil/?id=...: rincian per komponen, koreksi estimasi, ekspor CSV.
 - /riwayat/: pencarian, filter, tautan detail, ekspor.
 - /belanja/: kalkulasi bahan mentah berdasarkan porsi, cadangan, stok, dan harga; ekspor CSV.
-- /laporan/: periode/sekolah, ringkasan, ekspor CSV, cetak/simpan PDF melalui browser, pengaturan ulang data.
+- /laporan/: periode/sekolah (bawaan: bulan catatan terbaru), ringkasan, ekspor CSV, cetak/simpan PDF melalui browser, pengaturan ulang data.
 
 ## Batasan demo
 
-Analisis tidak memanggil AI: setiap pencatatan baru memakai persentase simulasi 18/8/32/5 untuk nasi/lauk/sayur/buah. Foto tidak dianalisis. Berat porsi, resep mentah, dan harga merupakan contoh. Data sisa tidak otomatis mengurangi porsi gizi.
+Analisis tidak memanggil AI: setiap pencatatan baru memakai persentase simulasi 18/8/32/5 untuk karbohidrat/lauk/sayur/buah. Foto tidak dianalisis. Berat porsi, resep mentah, dan harga merupakan contoh. Data sisa tidak otomatis mengurangi porsi gizi.
 
 Foto diperkecil di browser menjadi JPEG dengan sisi terpanjang 900 px. Catatan dan foto disimpan di localStorage perangkat, tanpa backend atau unggahan ke server. Kapasitas penyimpanan bergantung pada browser; kegagalan simpan ditampilkan kepada pengguna. Rencana belanja hanya berlaku selama halaman dibuka dan dapat diekspor.
 

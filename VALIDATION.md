@@ -66,3 +66,12 @@ The pair selector provides separate camera and gallery actions for before/after 
 Production build and TypeScript passed. Browser verification at 390x844 confirmed camera opening/closing, heading focus and return focus, gallery uploads both directly and inside the camera screen, review/confirmation, and progression with both uploaded photos to the final review. No horizontal overflow; the 76px shutter stays above mobile navigation. Camera viewfinder and container both measure 324px wide. Screenshots: ../.impeccable/review/mobile-camera.jpg and mobile-camera-preview.jpg.
 
 The test browser left live camera permission pending, so physical camera capture, permission denial/retry, and real iOS/Android hardware behavior remain unverified. Live camera requires HTTPS or localhost; a phone visiting a plain HTTP LAN address can use the gallery fallback. Framing assists composition only; no live food detection or AI measurement was added.
+
+
+## Consistency cleanup — 24 November 2026
+
+- The first component is now named "Karbohidrat" everywhere (data, dashboard, reports, landing copy). Records saved in the browser under the old "Kentang" name are renamed on load.
+- "Ayam panggang & capcai" now records "Nasi putih" as its carbohydrate instead of "Kentang panggang".
+- Shopping defaults now follow the demo menu: kentang, ayam, buncis/wortel/edamame and anggur hijau. The Rp2,942,813 figure above used the old ingredient list. With the new defaults, 500 portions at a 5% buffer total Rp5,729,500 (calculated, not browser-tested).
+- The dashboard period label now says "7 hari hingga catatan terakhir", matching how it filters.
+- The report period defaults to the calendar month of the latest record instead of a fixed November 2026 range.

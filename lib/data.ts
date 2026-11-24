@@ -6,11 +6,12 @@ export type Report = {
 };
 export const schools = ["SDN Nusantara 01", "SDN Nusantara 02", "SMP Harapan Bangsa"];
 export const components: ComponentResult[] = [
-  { name: "Kentang", food: "Kentang panggang", portion: 150, percent: 18 },
+  { name: "Karbohidrat", food: "Kentang panggang", portion: 150, percent: 18 },
   { name: "Lauk", food: "Ayam goreng", portion: 70, percent: 8 },
   { name: "Sayur", food: "Buncis, wortel & edamame", portion: 80, percent: 32 },
   { name: "Buah", food: "Anggur hijau", portion: 100, percent: 5 },
 ];
+export const componentNames = components.map(c => c.name);
 export const seedReports: Report[] = [
   { id: "TNT-1019", school: schools[0], date: "2026-11-19", menu: "Ayam goreng, kentang & sayuran", samples: 30, portions: 300, components, source: "contoh" },
   { id: "TNT-1018", school: schools[1], date: "2026-11-19", menu: "Ayam goreng, kentang & sayuran", samples: 25, portions: 250, components: components.map((c, i) => ({ ...c, percent: [15, 6, 28, 4][i] })), source: "contoh" },
